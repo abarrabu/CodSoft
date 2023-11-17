@@ -1,0 +1,66 @@
+
+# Define a dictionary to store to-do items
+todo_list = {}
+
+# Function to add a to-do item
+def add_todo():
+    task = input("Enter the task: ")
+    todo_list[len(todo_list) + 1] = task
+    print("Task added successfully!")
+
+# Function to display all to-do items
+def display_todo():
+    if not todo_list:
+        print("No tasks in the to-do list.")
+    else:
+        print("To-Do List:")
+        for task_id, task in todo_list.items():
+            print(f"{task_id}: {task}")
+
+# Function to edit a to-do item
+def edit_todo():
+    display_todo()
+    task_id = int(input("Enter the task ID you want to edit: "))
+    if task_id in todo_list:
+        new_task = input("Enter the new task: ")
+        todo_list[task_id] = new_task
+        print("Task updated successfully!")
+    else:
+        print("Task not found.")
+
+# Function to delete a to-do item
+def delete_todo():
+    display_todo()
+    task_id = int(input("Enter the task ID you want to delete: "))
+    if task_id in todo_list:
+        del todo_list[task_id]
+        print("Task deleted successfully!")
+    else:
+        print("Task not found.")
+
+# Main application loop
+while True:
+    print("\nMenu:")
+    print("1. Add a to-do item")
+    print("2. Display to-do list")
+    print("3. Edit a to-do item")
+    print("4. Delete a to-do item")
+    print("5. Quit")
+
+    choice = input("Enter your choice (1/2/3/4/5): ")
+
+    if choice == "1":
+        add_todo()
+    elif choice == "2":
+        display_todo()
+    elif choice == "3":
+        edit_todo()
+    elif choice == "4":
+        delete_todo()
+    elif choice == "5":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please select a valid option (1/2/3/4/5).")
+
+# End of the program
