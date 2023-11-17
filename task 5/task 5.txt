@@ -1,0 +1,88 @@
+import random
+
+# Sample quiz questions in the form of a list of dictionaries
+quiz_questions = [
+    {
+        "question": "What is the capital of France?",
+        "options": ["A) London", "B) Paris", "C) Berlin", "D) Rome"],
+        "correct_answer": "B",
+    },
+    {
+        "question": "Which planet is known as the Red Planet?",
+        "options": ["A) Mars", "B) Venus", "C) Jupiter", "D) Earth"],
+        "correct_answer": "A",
+    },
+    {
+        "question": "How many continents are there on Earth?",
+        "options": ["A) 5", "B) 6", "C) 7", "D) 8"],
+        "correct_answer": "C",
+    },
+    {
+        "question": "What is the largest mammal on Earth?",
+        "options": ["A) Elephant", "B) Blue Whale", "C) Giraffe", "D) Lion"],
+        "correct_answer": "B",
+    },
+    {
+        "question": "Which gas is most abundant in Earth's atmosphere?",
+        "options": ["A) Oxygen", "B) Carbon Dioxide", "C) Nitrogen", "D) Hydrogen"],
+        "correct_answer": "C",
+    },
+    {
+        "question": "Who is the author of 'Romeo and Juliet'?",
+        "options": ["A) Charles Dickens", "B) William Shakespeare", "C) Mark Twain", "D) Jane Austen"],
+        "correct_answer": "B",
+    },
+]
+
+def load_questions():
+    # You can load questions from a file or an external source here.
+    return quiz_questions
+
+def display_question(question, options):
+    print(question)
+    for option in options:
+        print(option)
+
+def evaluate_answer(user_answer, correct_answer):
+    return user_answer == correct_answer
+
+def play_quiz(questions):
+    score = 0
+    total_questions = len(questions)
+
+    for question in questions:
+        print("\n" + "-" * 40)
+        display_question(question["question"], question["options"])
+        user_answer = input("Select the correct option (A, B, C, or D): ").strip().upper()
+
+        if evaluate_answer(user_answer, question["correct_answer"]):
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Incorrect. The correct answer is {question['correct_answer']}.")
+
+    return score, total_questions
+
+def main():
+    print("Welcome to the Quiz Game!")
+    print("You'll be asked multiple-choice questions. Select the correct option.")
+
+    while True:
+        questions = load_questions()
+        score, total_questions = play_quiz(questions)
+
+        print("\n" + "-" * 40)
+        print(f"Quiz completed! Your score: {score}/{total_questions}")
+
+        if score == total_questions:
+            print("Congratulations! You got all questions right!")
+        else:
+            print("Keep practicing. You can do better!")
+
+        play_again = input("Play again? (yes/no): ").strip().lower()
+        if play_again != "yes":
+            break
+
+if __name__ == "__main__":
+    main()
+
