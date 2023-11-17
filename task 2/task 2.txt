@@ -1,0 +1,51 @@
+
+20-025- Jaishree
+10:20 (1 minute ago)
+to me
+
+import tkinter as tk
+
+def on_click(event):
+    text = event.widget.cget("text")
+
+    if text == "=":
+        try:
+            result = str(eval(screen.get()))
+            screen.set(result)
+        except:
+            screen.set("Error")
+    elif text == "C":
+        screen.set("")
+    else:
+        screen.set(screen.get() + text)
+
+# Create the main window
+root = tk.Tk()
+root.geometry("400x600")
+root.title("Calculator")
+
+# Entry widget to display input and results
+screen = tk.StringVar()
+entry = tk.Entry(root, textvar=screen, font="lucida 20 bold")
+entry.pack(fill=tk.X, ipadx=8, padx=10, pady=10)
+
+# Create buttons for the calculator
+button_frame = tk.Frame(root)
+button_frame.pack()
+
+buttons = [
+    "7", "8", "9", "+",
+    "4", "5", "6", "-",
+    "1", "2", "3", "*",
+    "C", "0", "=", "/"
+]
+
+i = 0
+for button in buttons:
+    if button == "=" or button == "C":
+        tk.Button(button_frame, text=button, font="lucida 15 bold", width=4, height=2, command=lambda text=button: on_click(text)).grid(row=i // 4, column=i % 4)
+    else:
+        tk.Button(button_frame, text=button, font="lucida 15 bold", width=4, height=2, command=lambda text=button: screen.set(screen.get() + text)).grid(row=i // 4, column=i % 4)
+    i += 1
+
+root.mainloop()
